@@ -1,0 +1,69 @@
+
+:root, body {
+    width: 100%;
+    height: 100%;
+    margin: 0;
+
+    --theme-color-1: hsl(222, 63%, 57%);
+    --theme-color-2: hsl(206, 61%, 54%);
+    --theme-color-3: hsl(190, 52%, 56%);
+    --theme-color-4: hsl(174, 70%, 60%);
+    --theme-color-5: hsl(156, 63%, 57%);
+
+}
+
+header {
+    --padding: 2%;
+    font-family: 'Poppins', sans-serif;
+    font-size: 3em;
+    height: 15%;
+    width: calc(100% - var(--padding));
+    padding-left: var(--padding);
+
+    display: flex;
+    align-items: center;
+    justify-content: left;
+    
+    background: linear-gradient(to right, var(--theme-color-1), var(--theme-color-3));
+    color: white;
+}
+
+div#main {
+    width: 95%;
+    margin-inline: 2.5%;
+    padding-top: 1em;
+    font-family: 'Noto Sans', sans-serif;
+    
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+    gap: 1em;
+
+}
+
+div#main em {
+    font-size: 0.9em;
+    color: hsl(0, 0%, 40%);
+}
+
+div#buttons {
+    width: 100%;
+}
+
+button {
+    font-family: 'Noto Sans', sans-serif;
+    padding: 0.5em;
+    margin: 0.25em;
+    background-color: white;
+    border: 2px solid var(--theme-color-2);
+    color: var(--theme-color-2);
+    font-weight: bold;
+    cursor: pointer;
+    transition: color 250ms, background-color 250ms;
+}
+
+button:hover {
+    color: white;
+    background-color: var(--theme-color-2);
+}
