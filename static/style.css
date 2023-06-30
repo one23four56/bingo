@@ -7,8 +7,9 @@
     --theme-color-1: hsl(222, 63%, 57%);
     --theme-color-2: hsl(206, 61%, 54%);
     --theme-color-3: hsl(190, 52%, 56%);
-    --theme-color-4: hsl(174, 70%, 60%);
-    --theme-color-5: hsl(156, 63%, 57%);
+    --theme-color-4: hsl(174, 70%, 40%);
+    --theme-color-5: hsl(156, 63%, 50%);
+    --theme-red-color: hsl(4, 56%, 55%);
 
 }
 
@@ -28,6 +29,15 @@ header {
     color: white;
 }
 
+header span {
+    cursor: text;
+    text-decoration: underline;
+}
+
+header span::after {
+    content: " Bingo";
+}
+
 div#main {
     width: 95%;
     margin-inline: 2.5%;
@@ -40,6 +50,35 @@ div#main {
     flex-direction: column;
     gap: 1em;
 
+}
+
+div#main > a {
+    color: black;
+    text-decoration: none;
+    align-self: baseline;
+    transition: padding-left 250ms;
+
+    display: flex;
+    align-items: center;
+    justify-content: left;
+    gap: 0.5em;
+}
+
+div#main i.hidden {
+    font-size: 2em;
+    color: var(--theme-color-4);
+}
+
+.hidden {
+    display: none;
+}
+
+div#main > a:hover i.hidden {
+    display: block;
+}
+
+div#main hr {
+    border: 1px solid var(--theme-color-5);
 }
 
 div#main em {
@@ -66,4 +105,32 @@ button {
 button:hover {
     color: white;
     background-color: var(--theme-color-2);
+}
+
+div#main hr {
+    width: 100%;
+}
+
+button.red {
+    color: var(--theme-red-color);
+    border-color: var(--theme-red-color);
+}
+
+button.red:hover {
+    background-color: var(--theme-red-color);
+    color: white;
+}
+
+dialog {
+    border: none;
+    border-radius: 10px;
+    font-family: 'Noto Sans', sans-serif;
+}
+
+dialog:modal {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+    gap: 1em;
 }
