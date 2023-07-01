@@ -7,6 +7,7 @@ id("create-button").addEventListener("click", () => {
         name: "Untitled",
         items: [],
         time: Date.now(),
+        freeSpace: true,
         formatVersion: 1,
     };
 

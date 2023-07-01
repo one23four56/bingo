@@ -45,7 +45,7 @@ div#main {
     font-family: 'Noto Sans', sans-serif;
     
     display: flex;
-    align-items: center;
+    align-items: baseline;
     justify-content: center;
     flex-direction: column;
     gap: 1em;
@@ -133,4 +133,45 @@ dialog:modal {
     justify-content: center;
     flex-direction: column;
     gap: 1em;
+}
+
+label {
+    width: 100%;
+}
+
+input[type=text] {
+    width: calc(100% - 0.5em);
+    font-size: 1.25em;
+    font-family: 'Noto Sans', sans-serif;
+    padding: 0.25em;
+    border: 2px solid var(--theme-color-4);
+}
+
+div#items {
+    border: 2px solid var(--theme-color-3);
+    max-height: 26em;
+    min-height: 3em;
+    overflow-y: auto;
+    width: 100%;
+}
+
+div#main > span {
+    font-size: 1.25em;
+}
+
+div.item {
+    width: calc(100% - 0.5em);
+    overflow-x: auto;
+    display: flex;
+    align-items: center;
+    justify-content: left;
+    padding: 0.25em;
+}
+
+div.item:nth-child(even) {
+    background-color: hsl(0, 0%, 90%);
+}
+
+div.item button {
+    margin-left: auto;
 }

@@ -10,6 +10,7 @@ export interface Project {
     name: string;
     items: string[];
     time: number;
+    freeSpace: boolean;
     formatVersion: 1; // for backwards compatibility if format is ever updated
 }
 

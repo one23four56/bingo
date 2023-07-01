@@ -37,3 +37,90 @@ id("delete-yes").addEventListener("click", () => {
     localStorage.removeItem(project.id);
     location.replace("index.html")
 })
+
+id<HTMLInputElement>("free-space").checked = project.freeSpace;
+id("free-space").addEventListener("input", () => {
+    project.freeSpace = id<HTMLInputElement>("free-space").checked;
+    updateItemCountText();
+    saveProject();
+})
+
+id("save").addEventListener("click", () => {
+    const
+        file = new Blob([JSON.stringify(project)], { type: 'text/plain' }),
+        a = document.createElement("a"),
+        url = URL.createObjectURL(file);
+
+    a.href = url;
+    a.download = project.name
+        .slice(0, 50) // maximum of 50 characters
+        .toLowerCase()
+        .replace(/[ _/\\!@#$%^&*()=+"';:\|\]\[.,]/g, "-") // normalize special characters
+        .replace(/-+/g, "-") // convert groups of dashes (---) into one dash (-)
+        + ".bingo"; // add file extension
+
+    a.click();
+    a.remove();
+    URL.revokeObjectURL(url);
+})
+
+id<HTMLInputElement>("create-item").addEventListener("keypress", event => {
+    if (event.key !== "Enter")
+        return;
+
+    const item = id<HTMLInputElement>("create-item").value.trim();
+
+    if (item === "" || project.items.includes(item))
+        return;
+
+    project.items.push(item);
+    saveProject();
+    addItem(item);
+    id<HTMLInputElement>("create-item").value = "";
+})
+
+function addItem(item: string) {
+
+    const div = document.createElement("div");
+    div.className = "item";
+    id("items").prepend(div);
+
+    div.appendChild(document.createElement("span")).innerText = item;
+
+    const button = div.appendChild(document.createElement("button"));
+    button.classList.add("red");
+    button.title = "Delete Item"
+
+    button.appendChild(document.createElement("i")).className = 
+        "fa-solid fa-trash";
+
+    button.addEventListener("click", () => {
+        // delete item
+
+        project.items = project.items.filter(i => i !== item);
+
+        for (const child of id("items").children)
+            if (child.querySelector("span")?.innerText === item)
+                child.remove();
+
+        updateItemCountText();
+        saveProject();
+    })
+
+    updateItemCountText();
+
+}
+
+function updateItemCountText() {
+    const required = 25 - (project.freeSpace ? 1 : 0);
+
+    id("item-count").innerText = `Items - ${project.items.length}`
+
+    if (project.items.length - required < 0)
+        id("item-count").innerText += ` (${required - project.items.length} more required)`
+}
+
+for (const item of project.items)
+    addItem(item);
+
+updateItemCountText(); // just in case there were zero items
