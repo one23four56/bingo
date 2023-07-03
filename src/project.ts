@@ -1,4 +1,4 @@
-import { id, get, set, qs, Project } from './index';
+import { id, get, set, qs, Project, alert } from './index';
 
 const projectId = new URLSearchParams(location.search).get("project") as string;
 
@@ -91,7 +91,7 @@ function addItem(item: string) {
     button.classList.add("red");
     button.title = "Delete Item"
 
-    button.appendChild(document.createElement("i")).className = 
+    button.appendChild(document.createElement("i")).className =
         "fa-solid fa-trash";
 
     button.addEventListener("click", () => {
@@ -124,3 +124,18 @@ for (const item of project.items)
     addItem(item);
 
 updateItemCountText(); // just in case there were zero items
+
+id("export-open").addEventListener("click", () => {
+    if (project.items.length + (project.freeSpace ? 1 : 0) < 25)
+        return alert(
+            `You must add ${25 - project.items.length - (project.freeSpace ? 1 : 0)} more items before you can export this project.`
+        );
+
+    id<HTMLDialogElement>("export-popup").showModal();
+});
+id("export-cancel").addEventListener("click", () => id<HTMLDialogElement>("export-popup").close());
+
+id("export").addEventListener("click", () => {
+    window.open(`export.html?project=${project.id}&cards=${id<HTMLInputElement>("cards").value}`);
+    id<HTMLDialogElement>("export-popup").close()
+})

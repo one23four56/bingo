@@ -14,3 +14,10 @@ export interface Project {
     formatVersion: 1; // for backwards compatibility if format is ever updated
 }
 
+export function alert(text: string) {
+    id("alert-text").innerText = text;
+    id<HTMLDialogElement>("alert").showModal();
+    id("alert-close").addEventListener("click",
+        () => id<HTMLDialogElement>("alert").close(),
+    { once: true });
+}
