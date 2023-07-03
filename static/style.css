@@ -127,6 +127,10 @@ dialog {
     font-family: 'Noto Sans', sans-serif;
 }
 
+dialog span {
+    text-align: center;
+}
+
 dialog:modal {
     display: flex;
     align-items: center;
