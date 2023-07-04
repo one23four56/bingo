@@ -34,6 +34,20 @@ header span {
     text-decoration: underline;
 }
 
+header a {
+    margin-left: auto;
+    margin-right: 0.5em;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    text-decoration: none;
+}
+
+header a button {
+    border: none;
+    padding: calc(0.5em + 2px);
+}
+
 header span::after {
     content: " Bingo";
 }
