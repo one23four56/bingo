@@ -69,13 +69,13 @@ id("import-button").addEventListener("click", () => {
             
             if (!isProject(object))
                 throw new Error("Extracted object does not properly implement Project");
-
-            if (get<string[]>("index").includes(object.id)) {
+            
+            if (get<string[]>("index", "[]").includes(object.id)) {
                 object.id = crypto.randomUUID();
                 endMessage = `A project with the same ID already existed, so the ID of the uploaded project has been updated.`
             }
 
-            set("index", [...get<string[]>("index"), object.id]);
+            set("index", [...get<string[]>("index", "[]"), object.id]);
             set(object.id, object);
 
             await alert(
