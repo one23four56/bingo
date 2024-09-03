@@ -14,16 +14,20 @@ h1 {
 }
 
 table {
-    font-family: 'Noto Sans', sans-serif;
+    font-family: 'Georgia';
     width: 100%;
     border-spacing: 0;
+}
+
+tr:first-of-type th {
+  font-family: 'Poppins', sans-serif;
 }
 
 td {
     border-top: 1px solid black;
     border-left: 1px solid black;
     border-collapse: collapse;
-    width: 20vw;
+    width: 19vw;
     position: relative;
 }
 
@@ -43,7 +47,7 @@ td div {
     text-align: center;
     font-size: 0.9em;
     overflow: hidden;
-    width: 20vw;
+    width: 19vw;
 }
 
 p {
