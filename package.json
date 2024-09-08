@@ -3,7 +3,7 @@
     "esbuild": "^0.18.10"
   },
   "scripts": {
-    "build": "esbuild src/home.ts src/project.ts src/export.ts --bundle --outdir=static --format=iife --sourcemap --watch",
-    "pack": "esbuild src/home.ts src/project.ts src/export.ts --bundle --outdir=static --format=iife --minify"
+    "build": "node build.mjs",
+    "pack": "node build.mjs pack"
   }
 }
