@@ -44,7 +44,7 @@ for (let card = 1; card <= cards; card++) {
     }
 
      document.body.appendChild(document.createElement("h1")).innerText =
-        project.name + (hideBingoTitle ? "" : "Bingo");
+        project.name + (hideBingoTitle ? "" : " Bingo");
 
     document.body.appendChild(document.createElement("p")).innerText =
         `Card ${card}`;
