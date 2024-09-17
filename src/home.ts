@@ -1,4 +1,4 @@
-import { id, Project, set, get, isProject, alert } from ".";
+import { id, Project, set, get, isProject, alert } from "./index";
 
 id("create-button").addEventListener("click", () => {
 
@@ -66,10 +66,10 @@ id("import-button").addEventListener("click", () => {
         try {
             const object = JSON.parse(text);
             let endMessage: string | null = null;
-            
+
             if (!isProject(object))
                 throw new Error("Extracted object does not properly implement Project");
-            
+
             if (get<string[]>("index", "[]").includes(object.id)) {
                 object.id = crypto.randomUUID();
                 endMessage = `A project with the same ID already existed, so the ID of the uploaded project has been updated.`
@@ -84,7 +84,7 @@ id("import-button").addEventListener("click", () => {
             )
 
             window.open(`project.html?project=${object.id}`, "_self")
-            
+
         } catch (err) {
             alert(`The file '${file.name}' is invalid.\n(${err})\nPlease make sure you upload a valid .bingo file`);
         }
