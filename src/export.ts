@@ -3,7 +3,8 @@ import { Project, get } from './index';
 const
     params = new URLSearchParams(location.search),
     projectId = params.get("project") as string,
-    cards = Number(params.get('cards'));
+    cards = Number(params.get('cards')),
+    hideBingoTitle = params.has('hide-bingo-title') as boolean;
 
 // if the project does not exist, redirect home
 if (typeof projectId !== "string" || !localStorage.getItem(projectId) || isNaN(cards))
@@ -42,8 +43,8 @@ for (let card = 1; card <= cards; card++) {
         list.push(row);
     }
 
-    document.body.appendChild(document.createElement("h1")).innerText =
-        project.name + " Bingo";
+     document.body.appendChild(document.createElement("h1")).innerText =
+        project.name + (hideBingoTitle ? "" : "Bingo");
 
     document.body.appendChild(document.createElement("p")).innerText =
         `Card ${card}`;
