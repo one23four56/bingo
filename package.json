@@ -1,9 +1,12 @@
 {
-  "dependencies": {
-    "esbuild": "^0.25.0"
-  },
   "scripts": {
     "build": "node build.mjs",
     "pack": "node build.mjs pack"
+  },
+  "devDependencies": {
+    "esbuild": "^0.28.1"
+  },
+  "allowScripts": {
+    "esbuild@0.28.1": true
   }
 }
