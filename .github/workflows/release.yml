@@ -32,25 +32,27 @@ jobs:
       - name: Build project
         run: npm run pack
 
-      - uses: actions/upload-pages-artifact@v3
-        with:
-          path: static
-
-  release-artifacts:
-    needs: build
-    if: ${{ github.event_name == 'release'}}
-    runs-on: ubuntu-latest
-    steps:
       - name: Zip `static` folder
         run: |
           cd static
           zip ../static.zip *
 
-      - name: Upload bundle.min.html to release
+      - name: Attach `static.zip` as artifact
+        uses: actions/upload-artifact@v7
+        with:
+          path: static.zip
+          archive: false
+
+      - name: Upload `static.zip` to release
+        if: ${{ github.event_name == 'release' }}
         uses: softprops/action-gh-release@v3
         with:
           files: |
             static.zip
+
+      - uses: actions/upload-pages-artifact@v3
+        with:
+          path: static
 
   deploy-pages:
     needs: build
