@@ -41,13 +41,13 @@ jobs:
     if: ${{ github.event_name == 'release'}}
     runs-on: ubuntu-latest
     steps:
-      - name: Zip static folder
+      - name: Zip `static` folder
         run: |
           cd static
           zip ../static.zip *
 
       - name: Upload bundle.min.html to release
-        uses: softprops/action-gh-release@v2
+        uses: softprops/action-gh-release@v3
         with:
           files: |
             static.zip
@@ -63,4 +63,4 @@ jobs:
 
     steps:
       - id: deploy
-        uses: actions/deploy-pages@v4
+        uses: actions/deploy-pages@v5
