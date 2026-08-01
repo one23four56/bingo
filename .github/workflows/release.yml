@@ -30,7 +30,7 @@ jobs:
         run: npm ci --include=dev
 
       - name: Build project
-        run: npm run build
+        run: npm run pack
 
       - uses: actions/upload-pages-artifact@v3
         with:
