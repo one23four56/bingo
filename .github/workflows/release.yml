@@ -1,0 +1,66 @@
+name: Release
+
+on:
+  workflow_dispatch:
+  release:
+    types: [published]
+
+permissions:
+  contents: write
+  pages: write
+  id-token: write
+
+concurrency:
+  group: pages
+  cancel-in-progress: true
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    outputs:
+      pages-artifact: pages
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 26
+          cache: npm
+
+      - name: Install dependencies
+        run: npm ci --include=dev
+
+      - name: Build project
+        run: npm run build
+
+      - uses: actions/upload-pages-artifact@v3
+        with:
+          path: static
+
+  release-artifacts:
+    needs: build
+    if: ${{ github.event_name == 'release'}}
+    runs-on: ubuntu-latest
+    steps:
+      - name: Zip static folder
+        run: |
+          cd static
+          zip ../static.zip *
+
+      - name: Upload bundle.min.html to release
+        uses: softprops/action-gh-release@v2
+        with:
+          files: |
+            static.zip
+
+  deploy-pages:
+    needs: build
+
+    environment:
+      name: github-pages
+      url: ${{ steps.deploy.outputs.page_url }}
+
+    runs-on: ubuntu-latest
+
+    steps:
+      - id: deploy
+        uses: actions/deploy-pages@v4
